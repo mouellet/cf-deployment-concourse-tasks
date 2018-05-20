@@ -24,6 +24,7 @@ run:
   path: cf-deployment-concourse-tasks/bosh-deploy/task
 
 params:
+  BBL_IAAS: gcp
   BBL_STATE_DIR: bbl-state
   # - Path to the directory containing the `bbl-state.json` file
   # - The path is relative to the `bbl-state` input

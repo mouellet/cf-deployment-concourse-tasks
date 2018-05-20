@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -eux
 
 check_collect_opsfiles_params() {
   if [ ! -d ${ROOT_DIR}/base-ops-files/${BASE_OPS_FILE_DIR} ]; then

@@ -9,10 +9,18 @@ fi
 
 function main() {
   check_input_params
+
+  if [ "${BBL_IAAS}" == "gcp" ]; then
+    pushd "bbl-state"
+      write_gcp_service_account_key
+    popd
+  fi
+
   setup_bosh_env_vars
   if [ "$REGENERATE_VARS_STORE" == true ]; then
     remove_vars_store
   fi
+
   bosh_interpolate
   bosh_deploy
 }

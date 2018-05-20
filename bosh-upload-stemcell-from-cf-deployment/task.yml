@@ -31,3 +31,5 @@ params:
   # - Required
   # - Filepath to the manifest file within the cf-deployment resource
   # - The path is relative to root of the `cf-deployment` input
+
+  STEMCELL_ALIAS: default

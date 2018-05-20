@@ -26,10 +26,11 @@ function check_upload_stemcell_params() {
 
 function upload_stemcell() {
   # Read potentially variable stemcell paramaters out of cf-deployment with bosh
+  set +x
   local os
-  os=$(bosh interpolate --path=/stemcells/alias=default/os cf-deployment/${MANIFEST_FILE})
+  os=$(bosh interpolate --path=/stemcells/alias=${STEMCELL_ALIAS}/os cf-deployment/${MANIFEST_FILE})
   local version
-  version=$(bosh interpolate --path=/stemcells/alias=default/version cf-deployment/${MANIFEST_FILE})
+  version=$(bosh interpolate --path=/stemcells/alias=${STEMCELL_ALIAS}/version cf-deployment/${MANIFEST_FILE})
 
   # Hardcode a couple of stable stemcell paramaters
   local stemcells_url
@@ -84,9 +85,15 @@ function upload_stemcell() {
 
 function main() {
   check_upload_stemcell_params
+
+  if [ "${INFRASTRUCTURE}" == "google" ]; then
+    pushd "bbl-state"
+      write_gcp_service_account_key
+    popd
+  fi
+
   setup_bosh_env_vars 'bbl-state'
   upload_stemcell
 }
 
 main
-
