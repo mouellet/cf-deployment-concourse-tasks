@@ -64,6 +64,10 @@ params:
   # - The target IAAS which bbl will create infrastructure
   # - Must be `aws` or `azure` or `gcp`
 
+  BBL_LB_TYPE: cf
+  # - Optional
+  # - `cf` or `concourse`
+
   BBL_LB_CERT:
   # - Required if `SKIP_LB_CREATION` is false
   # - PEM encoded certificate to be associated with the load balancer
