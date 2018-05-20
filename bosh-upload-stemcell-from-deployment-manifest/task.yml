@@ -13,7 +13,7 @@ inputs:
 - name: bbl-state  # - The repo containing the Director's bbl state dir
 
 run:
-  path: cf-deployment-concourse-tasks/bosh-upload-stemcell-from-cf-deployment/task
+  path: cf-deployment-concourse-tasks/bosh-upload-stemcell-from-deployment-manifest/task
 
 params:
   BBL_STATE_DIR: bbl-state
