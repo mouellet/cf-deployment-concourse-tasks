@@ -23,7 +23,7 @@ function main() {
       --debug \
       destroy \
       --no-confirm \
-      --skip-if-missing > "logs/bbl_destroy.txt"
+      --skip-if-missing > "${root_dir}"/bbl_destroy.txt
   popd
 }
 
