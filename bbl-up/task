@@ -12,24 +12,26 @@ function check_fast_fails() {
       exit 1
     fi
 
-    if [ -z "${LB_DOMAIN}" ] && [ "${BBL_LB_TYPE}" == "cf" ]; then
-      echo "\$LB_DOMAIN is a required parameter when \$BBL_LB_TYPE=cf.  Please set the domain."
-      exit 1
-    fi
-
     if [ -n "${LB_DOMAIN}" ] && [ "${BBL_LB_TYPE}" == "concourse" ]; then
       echo "\$LB_DOMAIN should not be set when \$BBL_LB_TYPE=concourse."
       exit 1
     fi
 
-    if [ -z "${BBL_LB_CERT}"  ]; then
-      echo "\$BBL_LB_CERT is a required parameter"
-      exit 1
-    fi
+    if [ "${BBL_LB_TYPE}" == "cf" ]; then
+      if [ -z "${LB_DOMAIN}" ]; then
+        echo "\$LB_DOMAIN is a required parameter when \$BBL_LB_TYPE=cf.  Please set the domain."
+        exit 1
+      fi
 
-    if [ -z "${BBL_LB_KEY}"  ]; then
-      echo "\$BBL_LB_KEY is a required parameter"
-      exit 1
+      if [ -z "${BBL_LB_CERT}"  ]; then
+        echo "\$BBL_LB_CERT is a required parameter"
+        exit 1
+      fi
+
+      if [ -z "${BBL_LB_KEY}"  ]; then
+        echo "\$BBL_LB_KEY is a required parameter"
+        exit 1
+      fi
     fi
   fi
 
