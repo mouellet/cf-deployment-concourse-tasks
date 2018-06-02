@@ -90,13 +90,18 @@ function main() {
     lb_flags=""
 
     if [ "${SKIP_LB_CREATION}" == "false" ]; then
-      local bbl_cert_chain_flag
-      bbl_cert_chain_flag=""
-      local bbl_cert_path
-      local bbl_cert_key
-      write_bbl_certs
+      if [ "${BBL_LB_TYPE}" == "cf" ]; then
+        local bbl_cert_chain_flag
+        bbl_cert_chain_flag=""
+        local bbl_cert_path
+        local bbl_cert_key
+        write_bbl_certs
 
-      lb_flags="--lb-type=${BBL_LB_TYPE} --lb-cert=${bbl_cert_path} ${bbl_cert_chain_flag} --lb-key=${bbl_key_path} --lb-domain=${LB_DOMAIN}"
+        lb_flags="--lb-type=${BBL_LB_TYPE} --lb-cert=${bbl_cert_path} ${bbl_cert_chain_flag} --lb-key=${bbl_key_path} --lb-domain=${LB_DOMAIN}"
+
+      elif [ "${BBL_LB_TYPE}" == "concourse" ]; then
+        lb_flags="--lb-type=${BBL_LB_TYPE}"
+      fi
     fi
 
     bbl plan \
