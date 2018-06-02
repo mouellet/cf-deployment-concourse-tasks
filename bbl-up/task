@@ -73,7 +73,7 @@ function main() {
     popd
   fi
 
-  mkdir -p "bbl-state/${BBL_STATE_DIR}"
+  mkdir -p "bbl-state/${BBL_STATE_DIR}/logs"
   pushd "bbl-state/${BBL_STATE_DIR}"
     bbl version
 
@@ -99,10 +99,7 @@ function main() {
 
     bbl plan \
       ${name_flag} \
-      ${lb_flags} > "${root_dir}/bbl_plan.txt"
-
-    mkdir -p /logs
-    cp -R ${root_dir}/bbl_plan.txt logs/bbl_plan.txt
+      ${lb_flags} > "bbl-state/${BBL_STATE_DIR}/logs/bbl_plan.txt"
 
     if [ -n "${BBL_CONFIG_DIR}" ]; then
       cp -r ${root_dir}/bbl-config/${BBL_CONFIG_DIR}/. .
