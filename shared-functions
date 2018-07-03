@@ -140,6 +140,11 @@ EOF
     bosh_arguments="--var-errs"
   fi
 
+  for va in ${VAR_ARGS}
+  do
+    arguments="${arguments} -v ${va}"
+  done
+
   bosh \
     -n \
     interpolate ${arguments} \
